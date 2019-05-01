@@ -8,10 +8,13 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.js",
-    "size": "size-limit"
+    "size": "size-limit",
+    "spell": "yarn docs && yaspeller *.md",
+    "docs": "documentation build *.js -f md -o api.md"
   },
   "devDependencies": {
     "@logux/eslint-config": "^28.2.0",
+    "documentation": "^10.1.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-es5": "^1.3.1",
@@ -23,14 +26,15 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
+    "husky": "^2.1.0",
     "lint-staged": "^8.1.5",
     "size-limit": "^1.3.0",
-    "husky": "^2.1.0"
+    "yaspeller": "^5.0.1"
   },
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "186 B"
+      "limit": "208 B"
     }
   ],
   "eslintConfig": {
@@ -47,11 +51,22 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint"
+    "*.js": "eslint",
+    "*.md": "yaspeller"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "yaspeller": {
+    "lang": "en",
+    "ignoreCapitalization": true,
+    "dictionary": [
+      "storeon",
+      "persistState",
+      "localstorage",
+      "redux"
+    ]
   }
 }

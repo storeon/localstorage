@@ -1,6 +1,6 @@
 # storeon-localstorage
 
-## Instalation
+## Installation
 
 ```
 yarn add storeon-localstorage
