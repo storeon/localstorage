@@ -1,6 +1,6 @@
 {
   "name": "storeon-localstorage",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Module for storeon to persist data from state to local storage",
   "main": "index.js",
   "repository": "https://github.com/polemius/storeon-localstorage",
