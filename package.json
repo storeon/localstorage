@@ -34,7 +34,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "208 B"
+      "limit": "185 B"
     }
   ],
   "eslintConfig": {
@@ -66,7 +66,8 @@
       "storeon",
       "persistState",
       "localstorage",
-      "redux"
+      "redux",
+      "gzipped"
     ]
   }
 }

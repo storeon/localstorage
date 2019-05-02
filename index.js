@@ -1,15 +1,13 @@
 /**
  * Storeon module to persist state to local storage
  *
- * @param {String|String[]} path The keys of state object
+ * @param {String[]} paths The keys of state object
  *    that will be store in local storage
  * @param {Object} config The config object
  * @param {String} [config.key='storeon'] The default key
  *    to use in local storage
  */
-const persistState = function (path, config = { key: 'storeon' }) {
-  const serialize = function (data) { return JSON.stringify(data) }
-  const deserialize = function (data) { return JSON.parse(data) }
+const persistState = function (paths = [], config = { key: 'storeon' }) {
   const key = config.key
 
   return function (store) {
@@ -19,7 +17,7 @@ const persistState = function (path, config = { key: 'storeon' }) {
         if (savedState === null) {
           return {}
         }
-        return deserialize(savedState)
+        return JSON.parse(savedState)
       } catch (err) {
         return {}
       }
@@ -31,18 +29,16 @@ const persistState = function (path, config = { key: 'storeon' }) {
       }
 
       let stateToStore = { }
-      if (typeof path === 'string') {
-        stateToStore = { [path]: state[path] }
-      } else if (Array.isArray(path)) {
-        path.forEach(function (p) {
+      if (paths.length === 0) {
+        stateToStore = state
+      } else {
+        paths.forEach(function (p) {
           stateToStore[p] = state[p]
         })
-      } else {
-        stateToStore = state
       }
 
       try {
-        const saveState = serialize(stateToStore)
+        const saveState = JSON.stringify(stateToStore)
         localStorage.setItem(key, saveState)
       } catch (err) {
         console.error(err)
