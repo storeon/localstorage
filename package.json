@@ -1,6 +1,6 @@
 {
   "name": "@storeon/localstorage",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Module for storeon to persist data from state to local storage",
   "main": "index.js",
   "repository": "https://github.com/storeon/storeon-localstorage",

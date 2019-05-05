@@ -1,6 +1,6 @@
-[![GitHub issues](https://img.shields.io/github/issues/polemius/storeon-localstorage.svg)](https://github.com/polemius/storeon-localstorage/issues)
-[![GitHub license](https://img.shields.io/github/license/polemius/storeon-localstorage.svg)](https://github.com/polemius/storeon-localstorage/blob/master/LICENSE)
-![npm](https://img.shields.io/npm/v/storeon-localstorage.svg)
+[![GitHub issues](https://img.shields.io/github/issues/storeon/storeon-localstorage.svg)](https://github.com/storeon/storeon-localstorage/issues)
+[![GitHub license](https://img.shields.io/github/license/storeon/storeon-localstorage.svg)](https://github.com/storeon/storeon-localstorage/blob/master/LICENSE)
+![npm](https://img.shields.io/npm/v/@storeon/localstorage.svg)
 
 <img src="https://storeon.github.io/storeon/logo.svg" align="right"
      alt="Storeon logo by Anton Lovchikov" width="160" height="142">
@@ -16,19 +16,19 @@ It uses [Size Limit] to control size.
 ## Installation
 
 ```
-yarn add storeon-localstorage
+yarn add @storeon/localstorage
 ```
 
 ## Usage
 
-If you want to store and sync state to `localStorage` you should import the `persistState` from `storeon-localstorage` and add this module to `createStore`.
+If you want to store and sync state to `localStorage` you should import the `persistState` from `@storeon/localstorage` and add this module to `createStore`.
 
 ```js
 import useStoreon from 'storeon/react';
 import StoreContext from 'storeon/react/context'
 
 import createStore from 'storeon'
-import persistState from 'storeon-localstorage'
+import persistState from '@storeon/localstorage'
 
 let name = store => {
   store.on('@init', () => ({ name: '' }))
