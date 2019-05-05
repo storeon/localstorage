@@ -2,6 +2,9 @@
 [![GitHub license](https://img.shields.io/github/license/polemius/storeon-localstorage.svg)](https://github.com/polemius/storeon-localstorage/blob/master/LICENSE)
 ![npm](https://img.shields.io/npm/v/storeon-localstorage.svg)
 
+<img src="https://storeon.github.io/storeon/logo.svg" align="right"
+     alt="Storeon logo by Anton Lovchikov" width="160" height="142">
+
 # storeon-localstorage
 
 The 185 bytes module for [storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
