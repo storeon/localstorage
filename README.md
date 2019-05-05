@@ -4,10 +4,8 @@
 
 # storeon-localstorage
 
-The module for [storeon] state manager. This module store and sync state to local storage.
-
-* **Small.** 185 B (minified and gzipped). No dependencies.
-  It uses [Size Limit] to control size.
+The 185 bytes module for [storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
+It uses [Size Limit] to control size.
 
 [Size Limit]: https://github.com/ai/size-limit
 [storeon]: https://github.com/storeon/storeon
@@ -20,71 +18,64 @@ yarn add storeon-localstorage
 
 ## Usage
 
-```js
-import persistState from 'storeon-localstorage'
-
-const store = createStore([
-  /* modules */
- persistState(), 
-])
-```
-
-### persistState(paths, config)
+If you want to store and sync state to `localStorage` you should import the `persistState` from `storeon-localstorage` and add this module to `createStore`.
 
 ```js
-type paths = Void | Array<String>
-```
+import useStoreon from 'storeon/react';
+import StoreContext from 'storeon/react/context'
 
-If no pass the `paths` value then `persistState` store in local storage all state.
-
-```js
-type config.key = String
-```
-
-Default value of `config.key` is `storeon`. This key used to store date in local storage.
-
-## EXAMPLE
-
-In this example the state of count is saving in local storage. The first parameter of `persistState` describe what should be save and synchronize. After refreshing the page, the module `storeon-localstorage` read the local storage and update the state. 
-
-```js
 import createStore from 'storeon'
 import persistState from 'storeon-localstorage'
 
-// Initial state, reducers and business logic are packed in independent modules
-let increment = store => {
-  // Initial state
-  store.on('@init', () => ({ count: 0 }))
-  // Reducers returns only changed part of the state
-  store.on('inc', ({ count }) => ({ count: count + 1 }))
+let name = store => {
+  store.on('@init', () => ({ name: '' }))
+
+  store.on('save', (state, name) => ({ name: name }))
 }
 
-export const store = createStore([
-  increment,
-  persistState(['count'])
+const store = createStore([
+  name,
+  persistState()
 ])
 ```
 
-```js
-import useStoreon from 'storeon/react' // or storeon/preact
+Here you can see that the form ask user the name and after that show this name.
 
-export default const Counter = () => {
-  // Counter will be re-render only on `state.count` changes
-  const { dispatch, count } = useStoreon('count')
-  return <button onClick={() => dispatch('inc')}>{count}</button>
+```js
+const Form = () => {
+const { dispatch, name } = useStoreon('name')
+
+return (
+  <React.Fragment>
+    {name !== '' && <h3>Hello {name}!</h3>}
+    {name === '' &&
+      <div>
+        <label>Name</label>
+        <input type="text" id="name" />
+        <br/>
+        <button onClick={
+          () => dispatch('save', document.getElementById('name').value)
+        }>Save</button>
+      </div>
+    }
+  </React.Fragment>
+)
+}
+
+const App = () => {
+  return (
+    <div className="App">
+      <StoreContext.Provider value={store}>
+        <Form />
+      </StoreContext.Provider>,
+    </div>
+  );
 }
 ```
 
-```js
-import StoreContext from 'storeon/react/context'
+Event after refresh the page the state is updating from `localStorage`. And user see the greeting message.
 
-render(
-  <StoreContext.Provider value={store}>
-    <Counter />
-  </StoreContext.Provider>,
-  document.body
-)
-```
+![Example of store state to local storage](example.gif)
 
 ## LICENSE
 
