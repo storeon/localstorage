@@ -1,9 +1,9 @@
 {
-  "name": "storeon-localstorage",
-  "version": "0.2.0",
+  "name": "@storeon/localstorage",
+  "version": "0.3.0",
   "description": "Module for storeon to persist data from state to local storage",
   "main": "index.js",
-  "repository": "https://github.com/polemius/storeon-localstorage",
+  "repository": "https://github.com/storeon/storeon-localstorage",
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
   "license": "MIT",
   "scripts": {
