@@ -3,7 +3,7 @@
   "version": "0.3.1",
   "description": "Module for storeon to persist data from state to local storage",
   "main": "index.js",
-  "repository": "https://github.com/storeon/storeon-localstorage",
+  "repository": "storeon/localstorage",
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
   "license": "MIT",
   "scripts": {
