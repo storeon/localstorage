@@ -41,7 +41,7 @@ const persistState = function (paths = [], config = { key: 'storeon' }) {
         const saveState = JSON.stringify(stateToStore)
         localStorage.setItem(key, saveState)
       } catch (err) {
-        console.error(err)
+
       }
     })
   }
