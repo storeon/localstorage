@@ -7,11 +7,12 @@
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.js test/*.js",
+    "lint": "eslint *.js test/*.js test/demo/*.js",
     "size": "size-limit",
     "spell": "yarn docs && yaspeller *.md",
     "docs": "documentation build *.js -f md -o api.md",
-    "test": "jest --coverage"
+    "test": "jest --coverage && yarn lint && size-limit && yarn spell",
+    "start": "parcel serve --cache-dir test/demo/.cache -d test/demo/dist test/demo/index.html --open"
   },
   "devDependencies": {
     "@logux/eslint-config": "^28.2.0",
@@ -30,6 +31,9 @@
     "husky": "^2.1.0",
     "jest": "^24.8.0",
     "lint-staged": "^8.1.5",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.8.6",
     "size-limit": "^1.3.0",
     "storeon": "^0.8.0",
     "yaspeller": "^5.0.1"
@@ -37,7 +41,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "185 B"
+      "limit": "177 B"
     }
   ],
   "eslintConfig": {
@@ -45,10 +49,6 @@
     "rules": {
       "node/no-unpublished-require": "off",
       "es5/no-es6-static-methods": "off",
-      "es5/no-destructuring": "off",
-      "es5/no-default-parameters": "off",
-      "es5/no-block-scoping": "off",
-      "es5/no-computed-properties": "off",
       "node/no-missing-require": "off",
       "func-style": "off"
     }

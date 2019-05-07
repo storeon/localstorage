@@ -7,7 +7,7 @@
 <img src="https://storeon.github.io/storeon/logo.svg" align="right"
      alt="Storeon logo by Anton Lovchikov" width="160" height="142">
 
-The 185 bytes module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
+The 177 bytes module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
 It uses [Size Limit] to control size.
 
 [Size Limit]: https://github.com/ai/size-limit

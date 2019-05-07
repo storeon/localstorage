@@ -7,13 +7,16 @@
  * @param {String} [config.key='storeon'] The default key
  *    to use in local storage
  */
-const persistState = function (paths = [], config = { key: 'storeon' }) {
-  const key = config.key
+var persistState = function (paths, config) {
+  config = config || { key: 'storeon' }
+  paths = paths || []
+
+  var key = config.key
 
   return function (store) {
     store.on('@init', function () {
       try {
-        const savedState = localStorage.getItem(key)
+        var savedState = localStorage.getItem(key)
         if (savedState === null) {
           return {}
         }
@@ -23,12 +26,12 @@ const persistState = function (paths = [], config = { key: 'storeon' }) {
       }
     })
     store.on('@dispatch', function (state, data) {
-      const event = data[0]
+      var event = data[0]
       if (event === '@init') {
         return
       }
 
-      let stateToStore = { }
+      var stateToStore = { }
       if (paths.length === 0) {
         stateToStore = state
       } else {
@@ -38,7 +41,7 @@ const persistState = function (paths = [], config = { key: 'storeon' }) {
       }
 
       try {
-        const saveState = JSON.stringify(stateToStore)
+        var saveState = JSON.stringify(stateToStore)
         localStorage.setItem(key, saveState)
       } catch (err) {
 

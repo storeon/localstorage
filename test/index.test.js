@@ -1,9 +1,9 @@
-const createStore = require('storeon')
+var createStore = require('storeon')
 
-const persistState = require('../')
+var persistState = require('../')
 
 it('should update the localStorage', function () {
-  const store = createStore([
+  var store = createStore([
     persistState()
   ])
   store.on('test', function () {
@@ -15,7 +15,7 @@ it('should update the localStorage', function () {
 })
 
 it('should update the state after init', function () {
-  const data = JSON.stringify({ a: 1, b: 2 })
+  var data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)
 
   createStore([
@@ -26,7 +26,7 @@ it('should update the state after init', function () {
 })
 
 it('should update the localStorage only white listed names', function () {
-  const store = createStore([
+  var store = createStore([
     persistState(['a'])
   ])
 
@@ -51,7 +51,7 @@ it('should handle non jsonable object in state', function () {
   jest.spyOn(JSON, 'stringify').mockImplementationOnce(function () {
     throw Error('mock error')
   })
-  const store = createStore([
+  var store = createStore([
     persistState(['a'])
   ])
 
