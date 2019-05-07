@@ -1,6 +1,13 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4
+
+* Rewrite the module to use only ES5 syntax
+* Reduce the size 
+* Add tests
+* Update documentation
+
 ## 0.3
 
 * Use only array of string in param

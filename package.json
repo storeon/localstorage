@@ -1,6 +1,6 @@
 {
   "name": "@storeon/localstorage",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Module for storeon to persist data from state to local storage",
   "main": "index.js",
   "repository": "storeon/localstorage",
@@ -80,7 +80,8 @@
       "redux",
       "gzipped",
       "Versioning",
-      "param"
+      "param",
+      "ES5"
     ]
   }
 }
