@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@logux/eslint-config": "^28.2.0",
+    "clean-publish": "^1.1.2",
     "documentation": "^10.1.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",

@@ -8,7 +8,7 @@
      alt="Storeon logo by Anton Lovchikov" width="160" height="142">
 
 The 177 bytes module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
-It uses [Size Limit] to control size.
+It uses [Size Limit] to control the size.
 
 [Size Limit]: https://github.com/ai/size-limit
 [Storeon]: https://github.com/storeon/storeon
@@ -82,7 +82,7 @@ If no pass the `paths` value then `persistState` store in local storage all stat
 type config.key = String
 ```
 
-Default value of `config.key` is `storeon`. This key is using to store date in local storage.
+Default value of `config.key` is `storeon`. This key is using to store data in local storage.
 
 ## LICENSE
 
