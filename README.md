@@ -1,7 +1,3 @@
-[![GitHub issues](https://img.shields.io/github/issues/storeon/localstorage.svg)](https://github.com/storeon/localstorage/issues)
-[![GitHub license](https://img.shields.io/github/license/storeon/localstorage.svg)](https://github.com/storeon/localstorage/blob/master/LICENSE)
-![npm](https://img.shields.io/npm/v/@storeon/localstorage.svg)
-
 # storeon-localstorage
 
 <img src="https://storeon.github.io/storeon/logo.svg" align="right"
