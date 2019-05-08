@@ -41,12 +41,13 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "177 B"
+      "limit": "171 B"
     }
   ],
   "eslintConfig": {
     "extends": "@logux/eslint-config/browser",
     "rules": {
+      "consistent-return": "off",
       "func-style": "off"
     }
   },

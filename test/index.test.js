@@ -58,11 +58,11 @@ it('should works with missed config key', function () {
 it('should hande non jsonable object in localStorage', function () {
   localStorage.setItem('storeon', 'test string')
 
-  createStore([
+  var store = createStore([
     persistState()
   ])
 
-  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({}))
+  expect(store.get()).toEqual({})
 })
 
 it('should handle non jsonable object in state', function () {
@@ -77,5 +77,5 @@ it('should handle non jsonable object in state', function () {
     return 'nonce'
   })
 
-  expect(store.get('test')).toEqual({})
+  expect(store.get()).toEqual({})
 })
