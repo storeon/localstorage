@@ -42,6 +42,19 @@ it('should update the localStorage only white listed names', function () {
   expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ a: 1 }))
 })
 
+it('should works with missed config key', function () {
+  var store = createStore([
+    persistState(['a'], { })
+  ])
+
+  store.on('test', function () {
+    return { a: 1 }
+  })
+  store.dispatch('test')
+
+  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ a: 1 }))
+})
+
 it('should hande non jsonable object in localStorage', function () {
   localStorage.setItem('storeon', 'test string')
 

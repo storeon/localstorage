@@ -8,10 +8,10 @@
  *    to use in local storage
  */
 var persistState = function (paths, config) {
-  config = config || { key: 'storeon' }
+  config = config || { }
   paths = paths || []
 
-  var key = config.key
+  var key = config.key || 'storeon'
 
   return function (store) {
     store.on('@init', function () {
