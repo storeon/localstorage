@@ -2,6 +2,10 @@ var createStore = require('storeon')
 
 var persistState = require('../')
 
+afterEach(function () {
+  localStorage.clear()
+})
+
 it('should update the localStorage', function () {
   var store = createStore([
     persistState()
@@ -33,6 +37,7 @@ it('should update the localStorage only white listed names', function () {
   store.on('test', function () {
     return { a: 1, b: 1 }
   })
+  store.dispatch('test')
 
   expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ a: 1 }))
 })
