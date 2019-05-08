@@ -2,7 +2,6 @@
   "name": "@storeon/localstorage",
   "version": "0.4.0",
   "description": "Module for storeon to persist data from state to local storage",
-  "main": "index.js",
   "repository": "storeon/localstorage",
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
   "license": "MIT",
@@ -42,15 +41,13 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "177 B"
+      "limit": "171 B"
     }
   ],
   "eslintConfig": {
     "extends": "@logux/eslint-config/browser",
     "rules": {
-      "node/no-unpublished-require": "off",
-      "es5/no-es6-static-methods": "off",
-      "node/no-missing-require": "off",
+      "consistent-return": "off",
       "func-style": "off"
     }
   },

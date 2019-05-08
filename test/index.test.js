@@ -2,6 +2,10 @@ var createStore = require('storeon')
 
 var persistState = require('../')
 
+afterEach(function () {
+  localStorage.clear()
+})
+
 it('should update the localStorage', function () {
   var store = createStore([
     persistState()
@@ -33,6 +37,20 @@ it('should update the localStorage only white listed names', function () {
   store.on('test', function () {
     return { a: 1, b: 1 }
   })
+  store.dispatch('test')
+
+  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ a: 1 }))
+})
+
+it('should works with missed config key', function () {
+  var store = createStore([
+    persistState(['a'], { })
+  ])
+
+  store.on('test', function () {
+    return { a: 1 }
+  })
+  store.dispatch('test')
 
   expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ a: 1 }))
 })
@@ -40,11 +58,11 @@ it('should update the localStorage only white listed names', function () {
 it('should hande non jsonable object in localStorage', function () {
   localStorage.setItem('storeon', 'test string')
 
-  createStore([
+  var store = createStore([
     persistState()
   ])
 
-  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({}))
+  expect(store.get()).toEqual({})
 })
 
 it('should handle non jsonable object in state', function () {
@@ -59,5 +77,5 @@ it('should handle non jsonable object in state', function () {
     return 'nonce'
   })
 
-  expect(store.get('test')).toEqual({})
+  expect(store.get()).toEqual({})
 })

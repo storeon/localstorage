@@ -7,7 +7,7 @@
 <img src="https://storeon.github.io/storeon/logo.svg" align="right"
      alt="Storeon logo by Anton Lovchikov" width="160" height="142">
 
-The 177 bytes module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
+The 171 bytes module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
 It uses [Size Limit] to control the size.
 
 [Size Limit]: https://github.com/ai/size-limit
@@ -47,7 +47,7 @@ import StoreContext from 'storeon/react/context'
 
 const Form = () => {
   const { dispatch, name } = useStoreon('name')
-  
+
   return (
     <React.Fragment>
       {name !== '' && <h3>Hello {name}!</h3>}

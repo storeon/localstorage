@@ -8,22 +8,19 @@
  *    to use in local storage
  */
 var persistState = function (paths, config) {
-  config = config || { key: 'storeon' }
+  config = config || { }
   paths = paths || []
 
-  var key = config.key
+  var key = config.key || 'storeon'
 
   return function (store) {
     store.on('@init', function () {
       try {
         var savedState = localStorage.getItem(key)
-        if (savedState === null) {
-          return {}
+        if (savedState !== null) {
+          return JSON.parse(savedState)
         }
-        return JSON.parse(savedState)
-      } catch (err) {
-        return {}
-      }
+      } catch (err) { }
     })
     store.on('@dispatch', function (state, data) {
       var event = data[0]
@@ -43,9 +40,7 @@ var persistState = function (paths, config) {
       try {
         var saveState = JSON.stringify(stateToStore)
         localStorage.setItem(key, saveState)
-      } catch (err) {
-
-      }
+      } catch (err) { }
     })
   }
 }
