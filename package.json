@@ -78,7 +78,8 @@
       "gzipped",
       "Versioning",
       "param",
-      "ES5"
+      "ES5",
+      "localStorage"
     ]
   }
 }
