@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.5
+
+* Added types for module
+
 ## 0.4
 
 * Rewrite the module to use only ES5 syntax
