@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.5.1
+
+* Update dependencies
+
 ## 0.5
 
 * Added types for module
