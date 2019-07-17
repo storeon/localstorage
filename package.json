@@ -1,6 +1,6 @@
 {
   "name": "@storeon/localstorage",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Module for storeon to persist data from state to local storage",
   "repository": "storeon/localstorage",
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
@@ -79,7 +79,9 @@
       "Versioning",
       "param",
       "ES5",
-      "localStorage"
+      "localStorage",
+      "Tomas",
+     "Sandven"
     ]
   }
 }
