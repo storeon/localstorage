@@ -14,10 +14,10 @@ var persistState = function (paths, config) {
   var key = config.key || 'storeon'
 
   return function (store) {
-    var initialized = false;
+    var initialized = false
 
     store.on('@init', function () {
-      initialized = true;
+      initialized = true
 
       try {
         var savedState = localStorage.getItem(key)
@@ -26,13 +26,8 @@ var persistState = function (paths, config) {
         }
       } catch (err) { }
     })
-    store.on('@dispatch', function (state, data) {
+    store.on('@dispatch', function (state) {
       if (!initialized) {
-        return;
-      }
-
-      var event = data[0]
-      if (event === '@init') {
         return
       }
 

@@ -4,6 +4,7 @@ var persistState = require('../')
 
 afterEach(function () {
   localStorage.clear()
+  jest.restoreAllMocks()
 })
 
 it('should update the localStorage', function () {
@@ -78,4 +79,22 @@ it('should handle non jsonable object in state', function () {
   })
 
   expect(store.get()).toEqual({})
+})
+
+it('should not process @dispatch before @init', function () {
+  localStorage.setItem('storeon', JSON.stringify({ a: 'foo' }))
+
+  var store = createStore([
+    // This module tries to trigger a save in the local storage module
+    function (s) {
+      s.on('@init', function () {
+        s.dispatch('foo')
+      })
+    },
+
+    persistState(['a'])
+  ])
+
+  // If a save was triggered by the first module, the state would now be blank
+  expect(store.get()).toEqual({ a: 'foo' })
 })
