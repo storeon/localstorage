@@ -1,51 +1,51 @@
-var useCallback = require('react').useCallback
-var Fragment = require('react').Fragment
-var render = require('react-dom').render
-var h = require('react').createElement
-var StoreContext = require('storeon/react/context')
-var createStore = require('storeon')
-var devtools = require('storeon/devtools')
-var connect = require('storeon/react/connect')
-var logger = require('storeon/devtools/logger')
+let useCallback = require('react').useCallback
+let Fragment = require('react').Fragment
+let render = require('react-dom').render
+let h = require('react').createElement
+let StoreContext = require('storeon/react/context')
+let createStore = require('storeon')
+let devtools = require('storeon/devtools')
+let connect = require('storeon/react/connect')
+let logger = require('storeon/devtools/logger')
 
-var persistState = require('../../')
+let persistState = require('../../')
 
 function counter (store) {
-  store.on('@init', function () {
+  store.on('@init', () => {
     return { count: 0 }
   })
-  store.on('inc', function (state) {
+  store.on('inc', state => {
     return { count: state.count + 1 }
   })
 }
 
 function Tracker (props) {
-  var hue = Math.round(255 * Math.random())
-  var style = { backgroundColor: 'hsla(' + hue + ', 50%, 50%, 0.2)' }
-  return h('div', { className: 'tracker', style: style }, props.value)
+  let hue = Math.round(255 * Math.random())
+  let style = { backgroundColor: 'hsla(' + hue + ', 50%, 50%, 0.2)' }
+  return h('div', { className: 'tracker', style }, props.value)
 }
 
 function Button (props) {
-  var onClick = useCallback(function () {
+  let onClick = useCallback(() => {
     props.dispatch(props.event)
   })
-  return h('button', { onClick: onClick }, props.text)
+  return h('button', { onClick }, props.text)
 }
 
 function ButtonClear () {
-  var onClick = function () {
+  let onClick = function () {
     localStorage.clear()
   }
-  return h('button', { onClick: onClick }, 'Clear localStorage')
+  return h('button', { onClick }, 'Clear localStorage')
 }
 
-var Tracker1 = connect('count', function (props) {
+let Tracker1 = connect('count', props => {
   return h(Tracker, {
     value: 'Counter: ' + props.count
   })
 })
 
-var Button1 = connect(function (props) {
+let Button1 = connect(props => {
   return h(Button, {
     dispatch: props.dispatch, event: 'inc', text: 'Increase counter'
   })
@@ -62,7 +62,7 @@ function App () {
   )
 }
 
-var store = createStore([counter, logger, persistState(), devtools()])
+let store = createStore([counter, logger, persistState(), devtools()])
 
 render(
   h(StoreContext.Provider, { value: store }, h(App)),
