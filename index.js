@@ -1,21 +1,7 @@
 /**
- * Compile a string that contains wildcard `*` to a matcher function
- *
- * @param {string} wildcard The string that needed to be compiled
- * @returns {function} The matcher function
- */
-var compileWildcard = function (wildcard) {
-  var regexpstring = '^' + wildcard.replace(/[*]/g, '[a-zA-Z0-9]+')
-  return function (value) {
-    // eslint-disable-next-line security/detect-non-literal-regexp
-    return (new RegExp(regexpstring)).test(value)
-  }
-}
-
-/**
  * Storeon module to persist state to local storage
  *
- * @param {String[]} paths The keys of state object
+ * @param {(String|RegExp)[]} paths The keys of state object
  *    that will be store in local storage
  * @param {Object} config The config object
  * @param {String} [config.key='storeon'] The default key
@@ -49,12 +35,13 @@ var persistState = function (paths, config) {
       if (paths.length === 0) {
         stateToStore = state
       } else {
-        var compiledMatchers = paths.map(function (wildcard) {
-          return compileWildcard(wildcard)
-        })
         Object.keys(state).forEach(function (stateKey) {
-          compiledMatchers.forEach(function (matches) {
-            if (matches(stateKey)) {
+          paths.forEach(function (condition) {
+            if (typeof condition === 'string') {
+              if (stateKey === condition) {
+                stateToStore[stateKey] = state[stateKey]
+              }
+            } else if (condition.test(stateKey)) {
               stateToStore[stateKey] = state[stateKey]
             }
           })
