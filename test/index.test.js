@@ -99,12 +99,12 @@ it('should not process @dispatch before @init', () => {
   expect(store.get()).toEqual({ a: 'foo' })
 })
 
-it('should support simple wildcards', () => {
+it('should support RegExp path', () => {
   let store = createStore([
-    persistState(['save-*'])
+    persistState([/^save-[a-z]/])
   ])
   store.on('test', () => {
-    return { 'save-b': 1 }
+    return { 'save-b': 1, 'b': 2 }
   })
   store.dispatch('test')
 
