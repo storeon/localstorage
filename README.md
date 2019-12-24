@@ -5,7 +5,7 @@
 
 Tiny module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
 
-It is just 171 bytes module (it uses [Size Limit] to control the size) without any dependencies.
+It is just 202 bytes module (it uses [Size Limit] to control the size) without any dependencies.
 
 [Size Limit]: https://github.com/ai/size-limit
 [Storeon]: https://github.com/storeon/storeon
@@ -70,7 +70,7 @@ Event after refresh the page the state is updating from `localStorage`. And user
 ### persistState(paths, config)
 
 ```js
-type paths = Void | Array<String>
+type paths = Void | Array<String> | Array<RegExp>
 ```
 
 If no pass the `paths` value then `persistState` store in local storage all state.

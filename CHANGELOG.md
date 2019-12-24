@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.7.0
+
+* Adding support for RegExp for using in `path` param. (by Andy Chen https://github.com/KsRyY)
+* Update dependencies
+
 ## 0.6.3
 
 * Update dependencies

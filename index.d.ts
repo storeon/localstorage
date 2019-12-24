@@ -9,14 +9,14 @@ declare namespace StoreonLocalStorage {
 /**
  * Storeon module to persist state to local storage
  *
- * @param {String[]} paths The keys of state object
+ * @param {String[]|RegExp[]} paths The keys of state object
  *    that will be store in local storage
  * @param {Config} config The config object
  * @param {String} [config.key='storeon'] The default key
  *    to use in local storage
  */
 declare function persistState<State>(
-  paths?: string[],
+  paths?: string[]|RegExp[],
   config?: StoreonLocalStorage.Config
 ): createStore.Module<State>;
 
