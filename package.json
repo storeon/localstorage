@@ -83,7 +83,8 @@
       "localStorage",
       "Tomas",
       "Sandven",
-      "eslint"
+      "eslint",
+      "compileWildcard"
     ]
   }
 }
