@@ -1,7 +1,7 @@
 /**
  * Storeon module to persist state to local storage
  *
- * @param {String[]} paths The keys of state object
+ * @param {(String|RegExp)[]} paths The keys of state object
  *    that will be store in local storage
  * @param {Object} config The config object
  * @param {String} [config.key='storeon'] The default key
@@ -35,8 +35,16 @@ var persistState = function (paths, config) {
       if (paths.length === 0) {
         stateToStore = state
       } else {
-        paths.forEach(function (p) {
-          stateToStore[p] = state[p]
+        Object.keys(state).forEach(function (stateKey) {
+          paths.forEach(function (condition) {
+            if (typeof condition === 'string') {
+              if (stateKey === condition) {
+                stateToStore[stateKey] = state[stateKey]
+              }
+            } else if (condition.test(stateKey)) {
+              stateToStore[stateKey] = state[stateKey]
+            }
+          })
         })
       }
 

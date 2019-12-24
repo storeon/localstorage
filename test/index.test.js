@@ -98,3 +98,17 @@ it('should not process @dispatch before @init', () => {
   // If a save was triggered by the first module, the state would now be blank
   expect(store.get()).toEqual({ a: 'foo' })
 })
+
+it('should support RegExp path', () => {
+  let store = createStore([
+    persistState([/^save-[a-z]/])
+  ])
+  store.on('test', () => {
+    return { 'save-b': 1, 'b': 2 }
+  })
+  store.dispatch('test')
+
+  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({
+    'save-b': 1
+  }))
+})
