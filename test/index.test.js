@@ -19,6 +19,18 @@ it('should update the localStorage', () => {
   expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ b: 1 }))
 })
 
+it('should update the localStorage only once, on @changed events', () => {
+  let spy = jest.spyOn(JSON, 'stringify')
+
+  let store = createStore([persistState()])
+  store.on('test', () => {
+    return { b: 1 }
+  })
+  store.dispatch('test')
+
+  expect(spy).toHaveBeenCalledTimes(1)
+})
+
 it('should update the state after init', () => {
   let data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)

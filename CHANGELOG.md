@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.8.0
+
+Ignore storeon @changed events so that data is not stored twice.
+
 ## 0.7.0
 
 * Adding support for RegExp for using in `path` param. (by Andy Chen https://github.com/KsRyY)
@@ -35,7 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.4
 
 * Rewrite the module to use only ES5 syntax
-* Reduce the size 
+* Reduce the size
 * Add tests
 * Update documentation
 
