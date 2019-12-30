@@ -3,6 +3,7 @@ import createStore from 'storeon';
 declare namespace StoreonLocalStorage {
   export interface Config {
     key?: string;
+    storage?: Storage;
   }
 }
 
@@ -14,6 +15,8 @@ declare namespace StoreonLocalStorage {
  * @param {Config} config The config object
  * @param {String} [config.key='storeon'] The default key
  *    to use in local storage
+ * @param {Storage} [config.storage] Can be set as sessionStorage or similar.
+ *     Defaults to localStorage.
  */
 declare function persistState<State>(
   paths?: string[]|RegExp[],

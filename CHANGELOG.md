@@ -1,9 +1,13 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.9.0
+
+* Add configuration to use `sessionStorage` instead of `localStorage`
+
 ## 0.8.0
 
-Ignore storeon @changed events so that data is not stored twice.
+* Ignore storeon `@changed` events so that data is not stored twice.
 
 ## 0.7.0
 

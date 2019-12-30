@@ -19,6 +19,31 @@ it('should update the localStorage', () => {
   expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({ b: 1 }))
 })
 
+it('should not update the sessionStorage', () => {
+  let store = createStore([
+    persistState()
+  ])
+  store.on('test', () => {
+    return { b: 1 }
+  })
+  store.dispatch('test')
+
+  expect(sessionStorage.getItem('storeon')).toBeNull()
+})
+
+it('should update the sessionStorage', () => {
+  let store = createStore([
+    persistState(null, { storage: sessionStorage })
+  ])
+  store.on('test', () => {
+    return { b: 1 }
+  })
+  store.dispatch('test')
+
+  expect(localStorage.getItem('storeon')).toBeNull()
+  expect(sessionStorage.getItem('storeon')).toEqual(JSON.stringify({ b: 1 }))
+})
+
 it('should update the localStorage only once, on @changed events', () => {
   let spy = jest.spyOn(JSON, 'stringify')
 
