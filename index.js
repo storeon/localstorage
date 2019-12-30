@@ -26,8 +26,8 @@ var persistState = function (paths, config) {
         }
       } catch (err) { }
     })
-    store.on('@dispatch', function (state) {
-      if (!initialized) {
+    store.on('@dispatch', function (state, event) {
+      if (!initialized || event[0] !== '@changed') {
         return
       }
 
