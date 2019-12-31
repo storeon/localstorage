@@ -15,8 +15,9 @@ declare namespace StoreonLocalStorage {
  * @param {Config} config The config object
  * @param {String} [config.key='storeon'] The default key
  *    to use in local storage
- * @param {Storage} [config.storage] Can be set as sessionStorage or similar.
- *     Defaults to localStorage.
+ * @param {Storage} [config.storage] Can be set as `sessionStorage` or
+ *    `localStorage`. Defaults value is `localStorage`.
+ *     Defaults value is `localStorage`.
  */
 declare function persistState<State>(
   paths?: string[]|RegExp[],

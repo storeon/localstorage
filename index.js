@@ -5,9 +5,9 @@
  *    that will be store in local storage
  * @param {Object} config The config object
  * @param {String} [config.key='storeon'] The default key
- *     to use in local storage
- * @param {Storage} [config.storage] Can be set as `sessionStorage` or similar.
- *     Defaults to localStorage.
+ *    to use in local storage
+ * @param {Storage} [config.storage] Can be set as `sessionStorage` or
+ *    `localStorage`. Defaults value is `localStorage`.
  */
 var persistState = function (paths, config) {
   config = config || { }
