@@ -5,13 +5,16 @@
  *    that will be store in local storage
  * @param {Object} config The config object
  * @param {String} [config.key='storeon'] The default key
- *    to use in local storage
+ *     to use in local storage
+ * @param {Storage} [config.storage] Can be set as `sessionStorage` or similar.
+ *     Defaults to localStorage.
  */
 var persistState = function (paths, config) {
   config = config || { }
   paths = paths || []
 
   var key = config.key || 'storeon'
+  var storage = config.storage || localStorage
 
   return function (store) {
     var initialized = false
@@ -20,7 +23,7 @@ var persistState = function (paths, config) {
       initialized = true
 
       try {
-        var savedState = localStorage.getItem(key)
+        var savedState = storage.getItem(key)
         if (savedState !== null) {
           return JSON.parse(savedState)
         }
@@ -50,7 +53,7 @@ var persistState = function (paths, config) {
 
       try {
         var saveState = JSON.stringify(stateToStore)
-        localStorage.setItem(key, saveState)
+        storage.setItem(key, saveState)
       } catch (err) { }
     })
   }
