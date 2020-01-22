@@ -60,11 +60,12 @@ it('should update the state after init', () => {
   let data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)
 
-  createStore([
+  let store = createStore([
     persistState()
   ])
 
   expect(localStorage.getItem('storeon')).toEqual(data)
+  expect(store.get()).toEqual({ a: 1, b: 2 })
 })
 
 it('should update the localStorage only white listed names', () => {
