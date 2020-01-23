@@ -1,4 +1,5 @@
 let createStore = require('storeon')
+let nanodelay = require('nanodelay')
 
 let persistState = require('../')
 
@@ -56,15 +57,17 @@ it('should update the localStorage only once, on @changed events', () => {
   expect(spy).toHaveBeenCalledTimes(1)
 })
 
-it('should update the state after init', () => {
+it('should update the state after init', async () => {
   let data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)
 
-  createStore([
+  let store = createStore([
     persistState()
   ])
 
+  await nanodelay(100)
   expect(localStorage.getItem('storeon')).toEqual(data)
+  expect(store.get()).toEqual({ a: 1, b: 2 })
 })
 
 it('should update the localStorage only white listed names', () => {
@@ -118,7 +121,7 @@ it('should handle non jsonable object in state', () => {
   expect(store.get()).toEqual({})
 })
 
-it('should not process @dispatch before @init', () => {
+it('should not process @dispatch before @init', async () => {
   localStorage.setItem('storeon', JSON.stringify({ a: 'foo' }))
 
   let store = createStore([
@@ -131,6 +134,8 @@ it('should not process @dispatch before @init', () => {
 
     persistState(['a'])
   ])
+
+  await nanodelay(100)
 
   // If a save was triggered by the first module, the state would now be blank
   expect(store.get()).toEqual({ a: 'foo' })

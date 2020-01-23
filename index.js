@@ -19,17 +19,21 @@ var persistState = function (paths, config) {
   return function (store) {
     var initialized = false
 
-    store.on('@init', function () {
+    store.on('data/update', function (_, data) {
+      return data
+    })
+
+    store.on('@init', async function () {
       initialized = true
 
       try {
-        var savedState = storage.getItem(key)
+        var savedState = await storage.getItem(key)
         if (savedState !== null) {
-          return JSON.parse(savedState)
+          store.dispatch('data/update', JSON.parse(savedState))
         }
       } catch (err) { }
     })
-    store.on('@dispatch', function (state, event) {
+    store.on('@dispatch', async function (state, event) {
       if (!initialized || event[0] !== '@changed') {
         return
       }
@@ -53,7 +57,7 @@ var persistState = function (paths, config) {
 
       try {
         var saveState = JSON.stringify(stateToStore)
-        storage.setItem(key, saveState)
+        await storage.setItem(key, saveState)
       } catch (err) { }
     })
   }
