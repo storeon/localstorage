@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.10.0
+
+* Now library can work with storages that return Promise for `getItem` and `setItem`
+
 ## 0.9.0
 
 * Add configuration to use `sessionStorage` instead of `localStorage`
