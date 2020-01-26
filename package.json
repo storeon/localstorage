@@ -61,7 +61,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint",
+    "*.js": "yarn test",
     "*.md": "yaspeller"
   },
   "husky": {
