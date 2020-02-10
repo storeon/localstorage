@@ -1,5 +1,4 @@
 let createStore = require('storeon')
-let nanodelay = require('nanodelay')
 
 let persistState = require('../')
 
@@ -57,7 +56,7 @@ it('should update the localStorage only once, on @changed events', () => {
   expect(spy).toHaveBeenCalledTimes(1)
 })
 
-it('should update the state after init', async () => {
+it('should update the state after init', () => {
   let data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)
 
@@ -65,7 +64,6 @@ it('should update the state after init', async () => {
     persistState()
   ])
 
-  await nanodelay(100)
   expect(localStorage.getItem('storeon')).toEqual(data)
   expect(store.get()).toEqual({ a: 1, b: 2 })
 })
@@ -121,7 +119,7 @@ it('should handle non jsonable object in state', () => {
   expect(store.get()).toEqual({})
 })
 
-it('should not process @dispatch before @init', async () => {
+it('should not process @dispatch before @init', () => {
   localStorage.setItem('storeon', JSON.stringify({ a: 'foo' }))
 
   let store = createStore([
@@ -135,10 +133,56 @@ it('should not process @dispatch before @init', async () => {
     persistState(['a'])
   ])
 
-  await nanodelay(100)
-
   // If a save was triggered by the first module, the state would now be blank
   expect(store.get()).toEqual({ a: 'foo' })
+})
+
+let asyncStorage = () => {
+  let s = {}
+  return {
+    setItem: (key, value) => {
+      return new Promise(resolve => {
+        s[key] = value
+        resolve(value)
+      })
+    },
+    getItem: key => {
+      return new Promise(resolve => {
+        resolve(s[key])
+      })
+    }
+  }
+}
+
+it('should handle store if it return Promise', async () => {
+  let storage = asyncStorage()
+  let store = createStore([
+    persistState(undefined, {
+      storage
+    })
+  ])
+  store.on('test', () => {
+    return { b: 1 }
+  })
+  store.dispatch('test')
+
+  expect(await storage.getItem('storeon')).toEqual(JSON.stringify({ b: 1 }))
+})
+
+it('should update the state after init with Promise', async () => {
+  let data = JSON.stringify({ a: 1, b: 2 })
+  let storage = asyncStorage()
+
+  await storage.setItem('storeon', data)
+
+  let store = createStore([
+    persistState(undefined, {
+      storage
+    })
+  ])
+
+  expect(await storage.getItem('storeon')).toEqual(data)
+  expect(store.get()).toEqual({ a: 1, b: 2 })
 })
 
 it('should support RegExp path', () => {
