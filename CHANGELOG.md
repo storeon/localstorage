@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.11.0
+
+* Rewrite async/await to use Promise
+
 ## 0.10.0
 
 * Now library can work with storages that return Promise for `getItem` and `setItem`

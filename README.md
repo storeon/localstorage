@@ -5,7 +5,7 @@
 
 Tiny module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
 
-It is just 222 bytes module (it uses [Size Limit] to control the size) without any dependencies.
+It is just 269 bytes module (it uses [Size Limit] to control the size) without any dependencies.
 
 [Size Limit]: https://github.com/ai/size-limit
 [Storeon]: https://github.com/storeon/storeon
