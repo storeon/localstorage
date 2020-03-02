@@ -9,47 +9,47 @@
  * @param {Storage} [config.storage] Can be set as `sessionStorage` or
  *    `localStorage`. Defaults value is `localStorage`.
  */
-var persistState = function (paths, config) {
+let persistState = function (paths, config) {
   config = config || { }
   paths = paths || []
 
-  var key = config.key || 'storeon'
-  var storage = config.storage || localStorage
+  let key = config.key || 'storeon'
+  let storage = config.storage || localStorage
 
   return function (store) {
-    var initialized = false
+    let initialized = false
 
-    store.on('data/update', function (_, data) {
+    store.on('data/update', (_, data) => {
       return data
     })
 
-    store.on('@init', function () {
+    store.on('@init', () => {
       initialized = true
 
       try {
-        var savedState = storage.getItem(key)
+        let savedState = storage.getItem(key)
         if (savedState !== null) {
           if (typeof savedState.then === 'function') {
-            savedState.then(function (value) {
+            savedState.then(value => {
               store.dispatch('data/update', JSON.parse(value))
-            }).catch(function () {})
+            }).catch(() => {})
           } else {
             store.dispatch('data/update', JSON.parse(savedState))
           }
         }
       } catch (err) { }
     })
-    store.on('@dispatch', function (state, event) {
+    store.on('@dispatch', (state, event) => {
       if (!initialized || event[0] !== '@changed') {
         return
       }
 
-      var stateToStore = { }
+      let stateToStore = { }
       if (paths.length === 0) {
         stateToStore = state
       } else {
-        Object.keys(state).forEach(function (stateKey) {
-          paths.forEach(function (condition) {
+        Object.keys(state).forEach(stateKey => {
+          paths.forEach(condition => {
             if (typeof condition === 'string') {
               if (stateKey === condition) {
                 stateToStore[stateKey] = state[stateKey]
@@ -62,7 +62,7 @@ var persistState = function (paths, config) {
       }
 
       try {
-        var saveState = JSON.stringify(stateToStore)
+        let saveState = JSON.stringify(stateToStore)
         return storage.setItem(key, saveState)
       } catch (err) { }
     })
