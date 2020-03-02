@@ -16,6 +16,10 @@ It is just 269 bytes module (it uses [Size Limit] to control the size) without a
 npm install @storeon/localstorage
 ```
 
+If you need to support IE, you need to [compile `node_modules`] with Babel.
+
+[compile `node_modules`]: https://developer.epages.com/blog/coding/how-to-transpile-node-modules-with-babel-and-webpack-in-a-monorepo/
+
 ## Usage
 
 If you want to store and sync state to `localStorage` you should import the `persistState` from `@storeon/localstorage` and add this module to `createStore`.
