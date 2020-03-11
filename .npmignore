@@ -10,3 +10,5 @@ coverage/
 test/
 .travis.yml
 example.gif
+.idea
+
