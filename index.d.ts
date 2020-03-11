@@ -1,4 +1,4 @@
-import createStore from 'storeon';
+import { StoreonModule } from 'storeon';
 
 declare namespace StoreonLocalStorage {
   export interface Config {
@@ -22,6 +22,6 @@ declare namespace StoreonLocalStorage {
 declare function persistState<State>(
   paths?: string[]|RegExp[],
   config?: StoreonLocalStorage.Config
-): createStore.Module<State>;
+): StoreonModule<State>;
 
 export = persistState;
