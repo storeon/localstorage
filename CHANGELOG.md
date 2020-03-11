@@ -1,6 +1,14 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.12.0
+
+* Update TypeScript typing for package. (by Andrey Chalkin https://github.com/L2jLiga)
+
+## 0.12.0
+
+* Move project to ES2015+
+
 ## 0.11.0
 
 * Rewrite async/await to use Promise
