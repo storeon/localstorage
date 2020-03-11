@@ -1,7 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 0.12.0
+## 0.13.1
+
+* Add .idea to .npmignore
+
+## 0.13.0
 
 * Update TypeScript typing for package. (by Andrey Chalkin https://github.com/L2jLiga)
 
