@@ -22,11 +22,11 @@ If you need to support IE, you need to [compile `node_modules`] with Babel.
 
 ## Usage
 
-If you want to store and sync state to `localStorage` you should import the `persistState` from `@storeon/localstorage` and add this module to `createStore`.
+If you want to store and sync state to `localStorage` you should import the `persistState` from `@storeon/localstorage` and add this module to `createStoreon`.
 
 ```js
-import createStore from 'storeon'
-import persistState from '@storeon/localstorage'
+import { createStoreon } from 'storeon'
+import { persistState } from '@storeon/localstorage'
 
 let name = store => {
   store.on('@init', () => ({ name: '' }))
@@ -34,7 +34,7 @@ let name = store => {
   store.on('save', (state, name) => ({ name: name }))
 }
 
-const store = createStore([
+const store = createStoreon([
   name,
   persistState(['name'])
 ])
@@ -43,8 +43,7 @@ const store = createStore([
 Here you can see that the form ask user the name and after that show this name.
 
 ```js
-import useStoreon from 'storeon/react';
-import StoreContext from 'storeon/react/context'
+import { StoreContext, useStoreon } = require('storeon/react')
 
 const Form = () => {
   const { dispatch, name } = useStoreon('name')

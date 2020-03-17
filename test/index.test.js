@@ -1,6 +1,6 @@
 let { createStoreon } = require('storeon')
 
-let persistState = require('../')
+let { persistState } = require('../')
 
 afterEach(() => {
   localStorage.clear()

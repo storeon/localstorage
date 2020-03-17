@@ -24,4 +24,4 @@ declare function persistState<State>(
   config?: StoreonLocalStorage.Config
 ): StoreonModule<State>;
 
-export = persistState;
+export = { persistState };

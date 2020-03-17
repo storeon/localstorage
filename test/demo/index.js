@@ -6,7 +6,7 @@ let { StoreContext, connectStoreon } = require('storeon/react')
 let { createStoreon } = require('storeon')
 let { storeonDevtools, storeonLogger } = require('storeon/devtools')
 
-let persistState = require('../../')
+let { persistState } = require('../../')
 
 function counter (store) {
   store.on('@init', () => {

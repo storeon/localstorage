@@ -69,4 +69,4 @@ let persistState = function (paths, config) {
   }
 }
 
-module.exports = persistState
+module.exports = { persistState }
