@@ -2,11 +2,9 @@ let useCallback = require('react').useCallback
 let Fragment = require('react').Fragment
 let render = require('react-dom').render
 let h = require('react').createElement
-let StoreContext = require('storeon/react/context')
-let createStore = require('storeon')
-let devtools = require('storeon/devtools')
-let connect = require('storeon/react/connect')
-let logger = require('storeon/devtools/logger')
+let { StoreContext, connectStoreon } = require('storeon/react')
+let { createStoreon } = require('storeon')
+let { storeonDevtools, storeonLogger } = require('storeon/devtools')
 
 let persistState = require('../../')
 
@@ -39,13 +37,13 @@ function ButtonClear () {
   return h('button', { onClick }, 'Clear localStorage')
 }
 
-let Tracker1 = connect('count', props => {
+let Tracker1 = connectStoreon('count', props => {
   return h(Tracker, {
     value: 'Counter: ' + props.count
   })
 })
 
-let Button1 = connect(props => {
+let Button1 = connectStoreon(props => {
   return h(Button, {
     dispatch: props.dispatch, event: 'inc', text: 'Increase counter'
   })
@@ -62,7 +60,9 @@ function App () {
   )
 }
 
-let store = createStore([counter, logger, persistState(), devtools()])
+let store = createStoreon(
+  [counter, storeonLogger, persistState(), storeonDevtools()]
+)
 
 render(
   h(StoreContext.Provider, { value: store }, h(App)),
