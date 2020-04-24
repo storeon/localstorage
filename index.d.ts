@@ -19,9 +19,7 @@ declare namespace StoreonLocalStorage {
  *    `localStorage`. Defaults value is `localStorage`.
  *     Defaults value is `localStorage`.
  */
-declare function persistState<State>(
+export declare function persistState<State>(
   paths?: string[]|RegExp[],
   config?: StoreonLocalStorage.Config
 ): StoreonModule<State>;
-
-export = { persistState };
