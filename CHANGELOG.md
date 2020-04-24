@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.15.0
+
+* Fix TypeScript typing for package. (by Andrey Chalkin https://github.com/L2jLiga)
+
 ## 0.14.0
 
 * Migrate to storeon ^2.0.0. Add dual publisher.
