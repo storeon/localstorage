@@ -9,64 +9,67 @@
  * @param {Storage} [config.storage] Can be set as `sessionStorage` or
  *    `localStorage`. Defaults value is `localStorage`.
  */
-let persistState = function (paths, config) {
-  config = config || { }
+let persistState = (paths, config) => {
+  config = config || {}
   paths = paths || []
 
   let key = config.key || 'storeon'
   let storage = config.storage || localStorage
 
-  return function (store) {
-    let initialized = false
+  let onChange = state => {
+    if (paths.length) {
+      state = filterState(state, paths)
+    }
 
-    store.on('data/update', (_, data) => {
-      return data
+    let saveState
+    try {
+      saveState = JSON.stringify(state)
+    } catch (err) {
+      return
+    }
+    return storage.setItem(key, saveState)
+  }
+
+  let event = Symbol('persistState')
+  return store => {
+    store.on(event, (_, serializedState) => {
+      try {
+        return JSON.parse(serializedState)
+      } catch (err) {}
     })
 
     store.on('@init', () => {
-      initialized = true
+      store.on('@changed', onChange)
 
-      try {
-        let savedState = storage.getItem(key)
-        if (savedState !== null) {
-          if (typeof savedState.then === 'function') {
-            savedState.then(value => {
-              store.dispatch('data/update', JSON.parse(value))
-            }).catch(() => {})
-          } else {
-            store.dispatch('data/update', JSON.parse(savedState))
-          }
+      let savedState = storage.getItem(key)
+      if (savedState) {
+        if (typeof savedState.then === 'function') {
+          savedState.then(
+            value => store.dispatch(event, value)
+          )
+        } else {
+          try {
+            return JSON.parse(savedState)
+          } catch (err) {}
         }
-      } catch (err) { }
-    })
-    store.on('@dispatch', (state, event) => {
-      if (!initialized || event[0] !== '@changed') {
-        return
       }
-
-      let stateToStore = { }
-      if (paths.length === 0) {
-        stateToStore = state
-      } else {
-        Object.keys(state).forEach(stateKey => {
-          paths.forEach(condition => {
-            if (typeof condition === 'string') {
-              if (stateKey === condition) {
-                stateToStore[stateKey] = state[stateKey]
-              }
-            } else if (condition.test(stateKey)) {
-              stateToStore[stateKey] = state[stateKey]
-            }
-          })
-        })
-      }
-
-      try {
-        let saveState = JSON.stringify(stateToStore)
-        return storage.setItem(key, saveState)
-      } catch (err) { }
     })
   }
+}
+
+let filterState = (state, paths) => {
+  let filteredState = {}
+  for (let key in state) {
+    for (let condition of paths) {
+      if (
+        (condition.test && condition.test(key)) ||
+        condition === key
+      ) {
+        filteredState[key] = state[key]
+      }
+    }
+  }
+  return filteredState
 }
 
 module.exports = { persistState }
