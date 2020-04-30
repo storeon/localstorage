@@ -27,7 +27,7 @@ let persistState = (paths, config) => {
     } catch (err) {
       return
     }
-    return storage.setItem(key, saveState)
+    storage.setItem(key, saveState)
   }
 
   let event = Symbol('persistState')
