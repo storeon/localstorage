@@ -105,7 +105,7 @@ it('should hande non jsonable object in localStorage', () => {
 })
 
 it('should handle non jsonable object in state', () => {
-  jest.spyOn(JSON, 'stringify').mockImplementationOnce(() => {
+  let mock = jest.spyOn(JSON, 'stringify').mockImplementation(() => {
     throw Error('mock error')
   })
   let store = createStoreon([
@@ -113,10 +113,12 @@ it('should handle non jsonable object in state', () => {
   ])
 
   store.on('test', () => {
-    return 'nonce'
+    return { a: 1 }
   })
+  store.dispatch('test')
 
-  expect(store.get()).toEqual({})
+  expect(mock).toHaveBeenCalledTimes(1)
+  expect(store.get()).toEqual({ a: 1 })
 })
 
 it('should not process @dispatch before @init', () => {
