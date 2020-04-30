@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.16.0
+
+* Refactoring main code and fixing test (by https://github.com/rndr)
+* Decrease size of library by 16 bytes: from 269 to 253 bytes (by https://github.com/rndr)
+
 # 0.15.0
 
 * Fix TypeScript typing for package. (by Andrey Chalkin https://github.com/L2jLiga)

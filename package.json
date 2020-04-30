@@ -1,6 +1,6 @@
 {
   "name": "@storeon/localstorage",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "Module for storeon to persist data from state to local storage",
   "repository": "storeon/localstorage",
   "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
@@ -95,7 +95,9 @@
       "Chalkin",
       "ES2015",
       "L2jLiga",
-      "npmignore"
+      "npmignore",
+      "Refactoring",
+      "rndr"
     ]
   }
 }
