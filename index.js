@@ -44,9 +44,7 @@ let persistState = (paths, config) => {
       let savedState = storage.getItem(key)
       if (savedState) {
         if (typeof savedState.then === 'function') {
-          savedState.then(
-            value => store.dispatch(event, value)
-          )
+          savedState.then(value => store.dispatch(event, value))
         } else {
           try {
             return JSON.parse(savedState)
@@ -61,10 +59,7 @@ let filterState = (state, paths) => {
   let filteredState = {}
   for (let key in state) {
     for (let condition of paths) {
-      if (
-        (condition.test && condition.test(key)) ||
-        condition === key
-      ) {
+      if ((condition.test && condition.test(key)) || condition === key) {
         filteredState[key] = state[key]
       }
     }

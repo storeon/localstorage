@@ -8,9 +8,7 @@ afterEach(() => {
 })
 
 it('should update the localStorage', () => {
-  let store = createStoreon([
-    persistState()
-  ])
+  let store = createStoreon([persistState()])
   store.on('test', () => {
     return { b: 1 }
   })
@@ -20,9 +18,7 @@ it('should update the localStorage', () => {
 })
 
 it('should not update the sessionStorage', () => {
-  let store = createStoreon([
-    persistState()
-  ])
+  let store = createStoreon([persistState()])
   store.on('test', () => {
     return { b: 1 }
   })
@@ -32,9 +28,7 @@ it('should not update the sessionStorage', () => {
 })
 
 it('should update the sessionStorage', () => {
-  let store = createStoreon([
-    persistState(null, { storage: sessionStorage })
-  ])
+  let store = createStoreon([persistState(null, { storage: sessionStorage })])
   store.on('test', () => {
     return { b: 1 }
   })
@@ -60,18 +54,14 @@ it('should update the state after init', () => {
   let data = JSON.stringify({ a: 1, b: 2 })
   localStorage.setItem('storeon', data)
 
-  let store = createStoreon([
-    persistState()
-  ])
+  let store = createStoreon([persistState()])
 
   expect(localStorage.getItem('storeon')).toEqual(data)
   expect(store.get()).toEqual({ a: 1, b: 2 })
 })
 
 it('should update the localStorage only white listed names', () => {
-  let store = createStoreon([
-    persistState(['a'])
-  ])
+  let store = createStoreon([persistState(['a'])])
 
   store.on('test', () => {
     return { a: 1, b: 1 }
@@ -82,9 +72,7 @@ it('should update the localStorage only white listed names', () => {
 })
 
 it('should works with missed config key', () => {
-  let store = createStoreon([
-    persistState(['a'], { })
-  ])
+  let store = createStoreon([persistState(['a'], {})])
 
   store.on('test', () => {
     return { a: 1 }
@@ -97,9 +85,7 @@ it('should works with missed config key', () => {
 it('should hande non jsonable object in localStorage', () => {
   localStorage.setItem('storeon', 'test string')
 
-  let store = createStoreon([
-    persistState()
-  ])
+  let store = createStoreon([persistState()])
 
   expect(store.get()).toEqual({})
 })
@@ -108,9 +94,7 @@ it('should handle non jsonable object in state', () => {
   let mock = jest.spyOn(JSON, 'stringify').mockImplementation(() => {
     throw Error('mock error')
   })
-  let store = createStoreon([
-    persistState(['a'])
-  ])
+  let store = createStoreon([persistState(['a'])])
 
   store.on('test', () => {
     return { a: 1 }
@@ -188,15 +172,15 @@ it('should update the state after init with Promise', async () => {
 })
 
 it('should support RegExp path', () => {
-  let store = createStoreon([
-    persistState([/^save-[a-z]/])
-  ])
+  let store = createStoreon([persistState([/^save-[a-z]/])])
   store.on('test', () => {
     return { 'save-b': 1, 'b': 2 }
   })
   store.dispatch('test')
 
-  expect(localStorage.getItem('storeon')).toEqual(JSON.stringify({
-    'save-b': 1
-  }))
+  expect(localStorage.getItem('storeon')).toEqual(
+    JSON.stringify({
+      'save-b': 1
+    })
+  )
 })

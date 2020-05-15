@@ -45,24 +45,28 @@ let Tracker1 = connectStoreon('count', props => {
 
 let Button1 = connectStoreon(props => {
   return h(Button, {
-    dispatch: props.dispatch, event: 'inc', text: 'Increase counter'
+    dispatch: props.dispatch,
+    event: 'inc',
+    text: 'Increase counter'
   })
 })
 
 function App () {
-  return h(Fragment, null,
+  return h(
+    Fragment,
+    null,
     h('div', null, 'After refresh the page the state should be same'),
     h(Tracker1),
-    h('div', { className: 'buttons' },
-      h(Button1),
-      h(ButtonClear)
-    )
+    h('div', { className: 'buttons' }, h(Button1), h(ButtonClear))
   )
 }
 
-let store = createStoreon(
-  [counter, storeonLogger, persistState(), storeonDevtools()]
-)
+let store = createStoreon([
+  counter,
+  storeonLogger,
+  persistState(),
+  storeonDevtools()
+])
 
 render(
   h(StoreContext.Provider, { value: store }, h(App)),
