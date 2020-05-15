@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.17.0
+
+* Update dependencies and update new lint rules
+
 # 0.16.1
 
 * Remove useless `return` and reduce size by 2 bytes (by https://github.com/rndr)
