@@ -96,7 +96,7 @@ Set `config.storage` with `sessionStorage` or other `Storage` implementation to 
 
 ## Server-side rendering
 
-`@storeon/localStorage` is not compatible with server-side rendering since it require `window` to operate. You can exclude it during server-side render process.
+`@storeon/localstorage` is not compatible with server-side rendering since it require `window` to operate. You can exclude it during server-side render process.
 
 ```js
 const store = createStoreon([
