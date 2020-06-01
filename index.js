@@ -13,6 +13,8 @@ let persistState = (paths, config) => {
   config = config || {}
   paths = paths || []
 
+  if (typeof window === 'undefined') return
+
   let key = config.key || 'storeon'
   let storage = config.storage || localStorage
 

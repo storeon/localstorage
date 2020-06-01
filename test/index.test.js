@@ -184,3 +184,12 @@ it('should support RegExp path', () => {
     })
   )
 })
+
+it('should return nothing if there is no window', () => {
+  jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined)
+  expect(window).toBeUndefined()
+
+  let store = createStoreon([persistState()])
+
+  expect(store.get()).toEqual({})
+})
