@@ -34,12 +34,12 @@
     "eslint-plugin-unicorn": "^20.1.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "lint-staged": "^10.2.6",
+    "lint-staged": "^10.2.7",
     "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "size-limit": "^4.5.0",
-    "storeon": "^2.0.2",
+    "storeon": "^3.0.2",
     "yaspeller": "^7.0.0"
   },
   "size-limit": [
