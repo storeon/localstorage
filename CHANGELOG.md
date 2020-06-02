@@ -1,6 +1,14 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.19.0
+
+* Update docs about SSR (by https://github.com/rayriffy)
+
+# 0.18.0
+
+* Update dependencies
+
 # 0.17.0
 
 * Update dependencies and update new lint rules

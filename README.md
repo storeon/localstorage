@@ -94,19 +94,6 @@ type config.storage = Storage
 
 Set `config.storage` with `sessionStorage` or other `Storage` implementation to change storage target. Otherwise `localStorage` is used (default).
 
-## Server-side rendering
-
-`@storeon/localstorage` is not compatible with server-side rendering since it require `window` to operate. You can exclude it during server-side render process.
-
-```js
-const store = createStoreon([
-  increment,
-  ...typeof window !== 'undefined' ? [
-    persistState(['name'])
-  ] : []
-])
-```
-
 ## LICENSE
 
 MIT
