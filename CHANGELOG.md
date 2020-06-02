@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.0.0
+
+* Add support SSR (by https://github.com/rayriffy)
+* Update dependencies
+
 # 0.19.0
 
 * Update docs about SSR (by https://github.com/rayriffy)
