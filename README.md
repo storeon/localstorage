@@ -5,7 +5,7 @@
 
 Tiny module for [Storeon] to store and sync state to `localStorage`. It restores state from `localStorage` during page loading and saves state on every change.
 
-It is just 265 bytes module (it uses [Size Limit] to control the size) without any dependencies.
+It is just 282 bytes module (it uses [Size Limit] to control the size) without any dependencies.
 
 [Size Limit]: https://github.com/ai/size-limit
 [Storeon]: https://github.com/storeon/storeon
@@ -93,6 +93,18 @@ type config.storage = Storage
 ```
 
 Set `config.storage` with `sessionStorage` or other `Storage` implementation to change storage target. Otherwise `localStorage` is used (default).
+
+```js
+type config.serializer = (object: any) => string
+```
+
+Set `config.serializer` to change serialization function. `JSON.stringify` is used by default.
+
+```js
+type config.deserializer = (data: string) => any
+```
+
+Set `config.deserializer` to change deserialization function. `JSON.parse` is used by default.
 
 ## LICENSE
 
