@@ -193,3 +193,37 @@ it('should return nothing if there is no window', () => {
 
   expect(store.get()).toEqual({})
 })
+
+it('should take custom serializer function and call it', () => {
+  let serializer = jest.fn()
+
+  let store = createStoreon([
+    persistState(undefined, {
+      serializer
+    })
+  ])
+
+  store.on('test', () => {
+    return { a: 1 }
+  })
+  store.dispatch('test')
+
+  expect(serializer).toHaveBeenCalledWith(store.get())
+})
+
+it('should take custom deserializer function and call it', () => {
+  let deserializer = jest.fn()
+
+  let data = JSON.stringify({ a: 1, b: 2 })
+  localStorage.setItem('storeon', data)
+
+  let persistedState = localStorage.getItem('storeon')
+
+  createStoreon([
+    persistState(undefined, {
+      deserializer
+    })
+  ])
+
+  expect(deserializer).toHaveBeenCalledWith(persistedState)
+})
