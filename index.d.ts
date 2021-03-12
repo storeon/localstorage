@@ -4,6 +4,8 @@ declare namespace StoreonLocalStorage {
   export interface Config {
     key?: string;
     storage?: Storage;
+    serializer?: (object: any) => string;
+    deserializer?: (data: string) => any;
   }
 }
 

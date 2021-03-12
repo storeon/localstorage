@@ -8,6 +8,10 @@
  *    to use in local storage
  * @param {Storage} [config.storage] Can be set as `sessionStorage` or
  *    `localStorage`. Defaults value is `localStorage`.
+ * @param {Function} [config.serializer] Function that will serialize
+ *    your data. Should take object as an argument. Defaults to `JSON.stringify`
+ * @param {Function} [config.deserializer] Function that will deserialize
+ *    your data. Should take string as an argument. Defaults to `JSON.parse`
  */
 let persistState = (paths, config) => {
   config = config || {}
@@ -17,6 +21,8 @@ let persistState = (paths, config) => {
 
   let key = config.key || 'storeon'
   let storage = config.storage || localStorage
+  let serializer = config.serializer || JSON.stringify
+  let deserializer = config.deserializer || JSON.parse
 
   let onChange = state => {
     if (paths.length) {
@@ -25,7 +31,7 @@ let persistState = (paths, config) => {
 
     let saveState
     try {
-      saveState = JSON.stringify(state)
+      saveState = serializer(state)
     } catch (err) {
       return
     }
@@ -36,7 +42,7 @@ let persistState = (paths, config) => {
   return store => {
     store.on(event, (_, serializedState) => {
       try {
-        return JSON.parse(serializedState)
+        return deserializer(serializedState)
       } catch (err) {}
     })
 
@@ -49,7 +55,7 @@ let persistState = (paths, config) => {
           savedState.then(value => store.dispatch(event, value))
         } else {
           try {
-            return JSON.parse(savedState)
+            return deserializer(savedState)
           } catch (err) {}
         }
       }
