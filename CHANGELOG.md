@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.3.1
+
+* Update dependencies
+
 # 1.3.0
 
 * Allow custom serialization/deserialization functions (by https://github.com/kamil7x)
