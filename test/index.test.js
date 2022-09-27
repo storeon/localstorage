@@ -227,3 +227,54 @@ it('should take custom deserializer function and call it', () => {
 
   expect(deserializer).toHaveBeenCalledWith(persistedState)
 })
+
+describe('should output errors when the debug flag is true', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error').mockReturnValue('error called')
+  })
+
+  it('serializer', () => {
+    let serializer = () => {
+      throw new Error('ERROR')
+    }
+    let store = createStoreon([persistState(null, { serializer, debug: true })])
+    let data = { a: 1 }
+    store.on('test', () => {
+      return { data }
+    })
+    store.dispatch('test')
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveReturnedWith('error called')
+  })
+
+  it('deserializer', () => {
+    let deserializer = () => {
+      throw new Error('ERROR')
+    }
+    let data = JSON.stringify({ a: 1 })
+    localStorage.setItem('storeon', data)
+    createStoreon([persistState(null, { deserializer, debug: true })])
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveReturnedWith('error called')
+  })
+
+  it('persist state', async () => {
+    let deserializer = () => {
+      throw new Error('ERROR')
+    }
+    let storage = asyncStorage()
+    let store = createStoreon([
+      persistState(undefined, {
+        storage,
+        deserializer,
+        debug: true,
+      }),
+    ])
+    store.on('test', () => {
+      return { b: 1 }
+    })
+    await store.dispatch('test')
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveReturnedWith('error called')
+  })
+})

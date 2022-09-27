@@ -12,6 +12,8 @@
  *    your data. Should take object as an argument. Defaults to `JSON.stringify`
  * @param {Function} [config.deserializer] Function that will deserialize
  *    your data. Should take string as an argument. Defaults to `JSON.parse`
+ * @param {boolean} [config.debug] Set to true to print serialization/deserialization errors.
+ *    Defaults to false.
  */
 let persistState = (paths, config) => {
   config = config || {}
@@ -33,6 +35,10 @@ let persistState = (paths, config) => {
     try {
       saveState = serializer(state)
     } catch (err) {
+      if (config.debug) {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
       return
     }
     storage.setItem(key, saveState)
@@ -43,7 +49,12 @@ let persistState = (paths, config) => {
     store.on(event, (_, serializedState) => {
       try {
         return deserializer(serializedState)
-      } catch (err) {}
+      } catch (err) {
+        if (config.debug) {
+          // eslint-disable-next-line no-console
+          console.error(err)
+        }
+      }
     })
 
     store.on('@init', () => {
@@ -56,7 +67,12 @@ let persistState = (paths, config) => {
         } else {
           try {
             return deserializer(savedState)
-          } catch (err) {}
+          } catch (err) {
+            if (config.debug) {
+              // eslint-disable-next-line no-console
+              console.error(err)
+            }
+          }
         }
       }
     })
