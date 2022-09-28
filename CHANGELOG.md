@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.5.0
+
+* Add debug option (by https://github.com/pkeller3)
+
 # 1.4.0
 
 * Migrate from husky to simple-git-hooks (https://github.com/toplenboren/simple-git-hooks)
