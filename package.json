@@ -8,7 +8,6 @@
   "scripts": {
     "lint": "eslint *.js test/*.js test/demo/*.js",
     "size": "size-limit",
-    "spell": "yarn docs && yaspeller *.md",
     "docs": "documentation build *.js -f md -o api.md",
     "test": "jest --coverage && yarn lint && size-limit",
     "start": "parcel serve --cache-dir test/demo/.cache -d test/demo/dist test/demo/index.html --open"
@@ -39,8 +38,7 @@
     "react-dom": "^17.0.1",
     "simple-git-hooks": "^2.0.2",
     "size-limit": "^4.10.1",
-    "storeon": "^3.1.4",
-    "yaspeller": "^7.0.0"
+    "storeon": "^3.1.4"
   },
   "size-limit": [
     {
@@ -64,45 +62,9 @@
     }
   },
   "lint-staged": {
-    "*.js": "yarn test",
-    "*.md": "yaspeller"
+    "*.js": "yarn test"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
-  },
-  "yaspeller": {
-    "lang": "en",
-    "ignoreCapitalization": true,
-    "dictionary": [
-      "sessionStorage",
-      "storeon",
-      "persistState",
-      "localstorage",
-      "redux",
-      "gzipped",
-      "Versioning",
-      "param",
-      "ES5",
-      "localStorage",
-      "Tomas",
-      "Sandven",
-      "eslint",
-      "RegExp",
-      "github",
-      "Chen",
-      "KsRyY",
-      "async",
-      "Chalkin",
-      "ES2015",
-      "L2jLiga",
-      "npmignore",
-      "Refactoring",
-      "rndr",
-      "rayriffy",
-      "SSR",
-      "md",
-      "kamil7x",
-      "toplenboren"
-    ]
   }
 }
