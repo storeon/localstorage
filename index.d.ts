@@ -6,6 +6,7 @@ declare namespace StoreonLocalStorage {
     storage?: Storage;
     serializer?: (object: any) => string;
     deserializer?: (data: string) => any;
+    debug?: boolean;
   }
 }
 
